@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História - João Pessoa 2025</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Audio Player -->
+    <audio id="background-music" loop>
+        <source src="assets/goldenhour.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <!-- Music Control Button -->
+    <div class="music-control">
+        <button id="music-toggle" class="music-btn">
+            <span class="music-icon">🎵</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">Nossa História</h1>
+            <p class="subtitle">Virada do Ano em João Pessoa - 2025</p>
+            <div class="hearts">
+                <span class="heart">💕</span>
+                <span class="heart">💖</span>
+                <span class="heart">💕</span>
+            </div>
+        </header>
+
+        <!-- Timeline -->
+        <div class="timeline">
+            <div class="timeline-item active" data-moment="1">
+                <div class="timeline-marker">
+                    <div class="marker-dot"></div>
+                    <div class="marker-line"></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="moment-card">
+                        <div class="image-container">
+                            <img src="assets/foto1.jpg" alt="Momento especial 1" class="moment-image">
+                            <div class="image-overlay">
+                                <span class="image-heart">💝</span>
+                            </div>
+                        </div>
+                        <div class="text-content">
+                            <h3 class="moment-title">Nosso Momento Mágico</h3>
+                            <p class="moment-text">
+                                Em João Pessoa, na virada do ano, vivemos momentos únicos e especiais. 
+                                Cada sorriso, cada olhar, cada abraço se tornou uma memória preciosa 
+                                que guardamos no coração. A magia da cidade se misturou com a nossa 
+                                felicidade, criando lembranças que durarão para sempre.
+                            </p>
+                            <div class="moment-date">31 de Dezembro, 2024</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-moment="2">
+                <div class="timeline-marker">
+                    <div class="marker-dot"></div>
+                    <div class="marker-line"></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="moment-card">
+                        <div class="image-container">
+                            <img src="assets/foto2.jpg" alt="Momento especial 2" class="moment-image">
+                            <div class="image-overlay">
+                                <span class="image-heart">💖</span>
+                            </div>
+                        </div>
+                        <div class="text-content">
+                            <h3 class="moment-title">Novo Ano, Novos Sonhos</h3>
+                            <p class="moment-text">
+                                Com o céu de João Pessoa como testemunha, começamos 2025 juntos, 
+                                cheios de esperança e amor. Cada momento ao seu lado é um presente, 
+                                cada risada compartilhada é uma bênção. Que este novo ano nos traga 
+                                ainda mais momentos como estes, repletos de carinho e cumplicidade.
+                            </p>
+                            <div class="moment-date">1º de Janeiro, 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-btn" data-target="1">
+                <span class="nav-icon">💕</span>
+                <span class="nav-text">Momento 1</span>
+            </button>
+            <button class="nav-btn active" data-target="2">
+                <span class="nav-icon">💖</span>
+                <span class="nav-text">Momento 2</span>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">Feito com muito amor 💝</p>
+            <div class="location">📍 João Pessoa, Paraíba</div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
