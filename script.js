@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let isMusicPlaying = false;
     
     // Inicializar a timeline e música
+    initTimeline();
+    
     function initTimeline() {
         showMoment(1);
         addEventListeners();
@@ -94,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             musicToggle.style.transform = '';
         }, 150);
+    }
     
     // Mostrar momento específico
     function showMoment(momentNumber) {
@@ -158,6 +161,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMoment(currentMoment - 1);
             } else if (e.key === 'ArrowRight' && currentMoment < timelineItems.length) {
                 showMoment(currentMoment + 1);
+            } else if (e.key === ' ' && e.target.tagName !== 'INPUT') { // Adicionado para controle de música
+                toggleMusic();
+                e.preventDefault(); // Previne o scroll da página ao pressionar espaço
             }
         });
         
@@ -191,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Observar elementos para animação
-        const elementsToAnimate = document.querySelectorAll('.moment-card, .header, .navigation, .footer');
+        const elementsToAnimate = document.querySelectorAll('.moment-card, .header, .navigation, .footer, .calendars-section'); // Adicionado calendars-section
         elementsToAnimate.forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
@@ -318,20 +324,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.addEventListener('keydown', stopAutoPlay);
     
-    // Inicializar tudo
-    initTimeline();
-    
     // Mensagem de boas-vindas
     setTimeout(() => {
-        console.log('💕 Site do casal carregado com amor! 💕');
+        console.log('💕 Site do casal carregado com amor!');
         console.log('Use as setas do teclado ou os botões para navegar');
         console.log('Clique nas imagens para ver efeitos especiais!');
     }, 1000);
 });
 
-
-
-// Função para abrir calendários
+// Função para abrir calendários (global para ser acessível do HTML)
 function openCalendar(type) {
     if (type === 'hero') {
         window.location.href = 'hero-calendar.html';
@@ -339,4 +340,5 @@ function openCalendar(type) {
         window.location.href = 'romance-calendar.html';
     }
 }
+
 

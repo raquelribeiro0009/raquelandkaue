@@ -451,6 +451,7 @@ body {
     background: linear-gradient(135deg, #f8f0ff 0%, #ffe8f3 100%);
     position: relative;
     overflow: hidden;
+    margin-top: 80px; /* Adicionado para separar da timeline */
 }
 
 .calendars-section::before {
@@ -814,7 +815,7 @@ body {
 
 @media (max-width: 480px) {
     .calendars-section {
-        padding: 60px 0;
+        padding: 20px 0; /* Reduzido para telas menores */
     }
     
     .calendars-title {
@@ -844,4 +845,5 @@ body {
         margin-bottom: 25px;
     }
 }
+
 
