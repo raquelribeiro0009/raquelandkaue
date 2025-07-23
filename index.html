@@ -99,11 +99,64 @@
             <button class="nav-btn active" data-target="2">
                 <span class="nav-icon">💖</span>
                 <span class="nav-text">Momento 2</span>
-            </button>
-        </div>
+            </bu        </div>
+    </main>
 
-        <!-- Footer -->
-        <footer class="footer">
+    <!-- Seção de Calendários -->
+    <section class="calendars-section">
+        <div class="container">
+            <h2 class="calendars-title">
+                <span class="heart">💕</span>
+                Nossos Calendários Personalizados
+                <span class="heart">💕</span>
+            </h2>
+            <p class="calendars-subtitle">Escolha seu calendário temático favorito!</p>
+            
+            <div class="calendar-buttons-container">
+                <!-- Botão Calendário Super-heróis -->
+                <div class="calendar-button-card hero-theme">
+                    <div class="button-background">
+                        <div class="hero-pattern"></div>
+                    </div>
+                    <div class="button-content">
+                        <div class="button-icons">
+                            <span class="theme-icon">🦸‍♂️</span>
+                            <span class="theme-icon">🕷️</span>
+                            <span class="theme-icon">🦇</span>
+                        </div>
+                        <h3 class="button-title">Calendário do Herói</h3>
+                        <p class="button-description">Batman, Homem-Aranha e Superman</p>
+                        <button class="calendar-access-btn hero-btn" onclick="openCalendar('hero')">
+                            <span class="btn-text">Acessar Calendário</span>
+                            <span class="btn-icon">⚡</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botão Calendário Romance -->
+                <div class="calendar-button-card romance-theme">
+                    <div class="button-background">
+                        <div class="romance-pattern"></div>
+                    </div>
+                    <div class="button-content">
+                        <div class="button-icons">
+                            <span class="theme-icon">👑</span>
+                            <span class="theme-icon">💖</span>
+                            <span class="theme-icon">🌸</span>
+                        </div>
+                        <h3 class="button-title">Calendário da Princesa</h3>
+                        <p class="button-description">Bridgerton, Heartstopper e Virgin River</p>
+                        <button class="calendar-access-btn romance-btn" onclick="openCalendar('romance')">
+                            <span class="btn-text">Acessar Calendário</span>
+                            <span class="btn-icon">✨</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->       <footer class="footer">
             <p class="footer-text">Feito com muito amor 💝</p>
             <div class="location">📍 João Pessoa, Paraíba</div>
         </footer>
