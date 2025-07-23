@@ -21,7 +21,8 @@
         </button>
     </div>
 
-    <div class="container">
+    <!-- Main Content -->
+    <div id="main-content" class="container">
         <!-- Header -->
         <header class="header">
             <h1 class="main-title">Nossa História</h1>
@@ -101,11 +102,9 @@
                 <span class="nav-text">Momento 2</span>
             </button>
         </div>
-    </div>
 
-    <!-- Seção de Calendários -->
-    <section class="calendars-section">
-        <div class="container">
+        <!-- Seção de Calendários -->
+        <section class="calendars-section">
             <h2 class="calendars-title">
                 <span class="heart">💕</span>
                 Nossos Calendários Personalizados
@@ -127,7 +126,7 @@
                         </div>
                         <h3 class="button-title">Calendário do Herói</h3>
                         <p class="button-description">Batman, Homem-Aranha e Superman</p>
-                        <button class="calendar-access-btn hero-btn" onclick="openCalendar('hero')">
+                        <button class="calendar-access-btn hero-btn" onclick="showCalendar('hero')">
                             <span class="btn-text">Acessar Calendário</span>
                             <span class="btn-icon">⚡</span>
                         </button>
@@ -147,24 +146,77 @@
                         </div>
                         <h3 class="button-title">Calendário da Princesa</h3>
                         <p class="button-description">Bridgerton, Heartstopper e Virgin River</p>
-                        <button class="calendar-access-btn romance-btn" onclick="openCalendar('romance')">
+                        <button class="calendar-access-btn romance-btn" onclick="showCalendar('romance')">
                             <span class="btn-text">Acessar Calendário</span>
                             <span class="btn-icon">✨</span>
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->       <footer class="footer">
+        <!-- Footer -->
+        <footer class="footer">
             <p class="footer-text">Feito com muito amor 💝</p>
             <div class="location">📍 João Pessoa, Paraíba</div>
         </footer>
     </div>
 
+    <!-- Calendar Modal -->
+    <div id="calendar-modal" class="calendar-modal hidden">
+        <div class="calendar-container">
+            <!-- Header do Calendário -->
+            <div class="calendar-header">
+                <button id="close-calendar" class="close-btn">
+                    <span>←</span> Voltar
+                </button>
+                <h2 id="calendar-title">Calendário</h2>
+                <div class="theme-selector">
+                    <button id="theme-btn-1" class="theme-btn active" data-theme="1"></button>
+                    <button id="theme-btn-2" class="theme-btn" data-theme="2"></button>
+                    <button id="theme-btn-3" class="theme-btn" data-theme="3"></button>
+                </div>
+            </div>
+
+            <!-- Navegação do Calendário -->
+            <div class="calendar-nav">
+                <button id="prev-month" class="nav-month-btn">‹</button>
+                <h3 id="current-month">Janeiro 2025</h3>
+                <button id="next-month" class="nav-month-btn">›</button>
+            </div>
+
+            <!-- Grid do Calendário -->
+            <div class="calendar-grid">
+                <div class="calendar-weekdays">
+                    <div class="weekday">DOM</div>
+                    <div class="weekday">SEG</div>
+                    <div class="weekday">TER</div>
+                    <div class="weekday">QUA</div>
+                    <div class="weekday">QUI</div>
+                    <div class="weekday">SEX</div>
+                    <div class="weekday">SÁB</div>
+                </div>
+                <div id="calendar-days" class="calendar-days">
+                    <!-- Dias serão gerados dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Painel de Eventos -->
+            <div class="events-panel">
+                <h4>Adicionar Evento</h4>
+                <div class="event-form">
+                    <input type="text" id="event-title" placeholder="Título do evento" maxlength="50">
+                    <input type="date" id="event-date">
+                    <button id="add-event" class="add-event-btn">Adicionar</button>
+                </div>
+                <div id="events-list" class="events-list">
+                    <!-- Eventos serão listados aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
-
 
