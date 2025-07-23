@@ -443,3 +443,405 @@ body {
     }
 }
 
+
+
+/* ===== SEÇÃO DE BOTÕES DOS CALENDÁRIOS ===== */
+.calendars-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f0ff 0%, #ffe8f3 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.calendars-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+.calendars-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2c1810;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.calendars-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.calendars-title .heart {
+    font-size: 2.5rem;
+    animation: heartbeat 2s ease-in-out infinite;
+    margin: 0 20px;
+}
+
+.calendar-buttons-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== BOTÃO TEMA SUPER-HERÓIS ===== */
+.hero-theme {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border: 3px solid #ffd700;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-theme .button-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.1;
+}
+
+.hero-pattern {
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, #ff0000 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, #0066ff 0%, transparent 50%),
+        linear-gradient(45deg, transparent 40%, rgba(255, 215, 0, 0.1) 50%, transparent 60%);
+    animation: heroPattern 8s ease-in-out infinite;
+}
+
+@keyframes heroPattern {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+}
+
+.hero-theme .button-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.hero-theme .button-title {
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-btn {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    border: 2px solid #ffd700;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-btn:hover {
+    background: linear-gradient(45deg, #ff5252, #26c6da, #42a5f5);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* ===== BOTÃO TEMA ROMANCE ===== */
+.romance-theme {
+    background: linear-gradient(135deg, #ffeef8 0%, #f8e8ff 50%, #ffe8f3 100%);
+    border: 3px solid #ff69b4;
+    position: relative;
+    overflow: hidden;
+}
+
+.romance-theme .button-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.2;
+}
+
+.romance-pattern {
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 30% 30%, #ffb6c1 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, #dda0dd 0%, transparent 50%),
+        linear-gradient(45deg, transparent 40%, rgba(255, 105, 180, 0.1) 50%, transparent 60%);
+    animation: romancePattern 6s ease-in-out infinite;
+}
+
+@keyframes romancePattern {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.05) rotate(-3deg); }
+}
+
+.romance-theme .button-content {
+    position: relative;
+    z-index: 2;
+    color: #2c1810;
+}
+
+.romance-theme .button-title {
+    color: #d63384;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.romance-btn {
+    background: linear-gradient(45deg, #ff69b4, #dda0dd, #ffb6c1);
+    border: 2px solid #ff1493;
+    color: white;
+    font-weight: 600;
+}
+
+.romance-btn:hover {
+    background: linear-gradient(45deg, #ff1493, #da70d6, #ff91a4);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* ===== ESTILOS GERAIS DOS BOTÕES ===== */
+.calendar-button-card {
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-button-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+.button-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.theme-icon {
+    font-size: 3rem;
+    animation: iconFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.theme-icon:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.theme-icon:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.1); }
+}
+
+.button-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.button-description {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.calendar-access-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-access-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+
+.calendar-access-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-icon {
+    position: relative;
+    z-index: 2;
+    font-size: 1.3rem;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .calendars-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    .calendars-title {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+    
+    .calendar-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-icon, .romance-icon {
+        font-size: 1.5rem;
+    }
+    
+    .calendar-date {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendars-section {
+        padding: 60px 0;
+    }
+    
+    .calendars-title {
+        font-size: 1.8rem;
+    }
+    
+    .calendar-header {
+        padding: 20px;
+    }
+    
+    .calendar-grid {
+        padding: 15px;
+    }
+    
+    .calendar-nav {
+        padding: 15px 20px;
+    }
+    
+    .month-year {
+        font-size: 1.1rem;
+    }
+}
+
+
+/* ===== RESPONSIVIDADE DOS BOTÕES ===== */
+@media (max-width: 768px) {
+    .calendar-buttons-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    .calendars-title {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .calendars-subtitle {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+    
+    .calendar-button-card {
+        padding: 30px 20px;
+    }
+    
+    .theme-icon {
+        font-size: 2.5rem;
+    }
+    
+    .button-title {
+        font-size: 1.6rem;
+    }
+    
+    .button-description {
+        font-size: 1rem;
+    }
+    
+    .calendar-access-btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendars-section {
+        padding: 60px 0;
+    }
+    
+    .calendars-title {
+        font-size: 1.8rem;
+    }
+    
+    .calendar-button-card {
+        padding: 25px 15px;
+    }
+    
+    .button-icons {
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .theme-icon {
+        font-size: 2rem;
+    }
+    
+    .button-title {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+    
+    .button-description {
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+    }
+}
+
