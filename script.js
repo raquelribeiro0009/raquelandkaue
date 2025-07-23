@@ -701,3 +701,300 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 });
 
+
+// ===== FUNCIONALIDADES DA GALERIA DE FOTOS =====
+
+// Lightbox para visualização de imagens
+function createLightbox() {
+    const lightbox = document.createElement('div');
+    lightbox.id = 'photo-lightbox';
+    lightbox.className = 'photo-lightbox hidden';
+    lightbox.innerHTML = `
+        <div class="lightbox-overlay">
+            <div class="lightbox-content">
+                <button class="lightbox-close">&times;</button>
+                <img class="lightbox-image" src="" alt="">
+                <div class="lightbox-info">
+                    <h3 class="lightbox-title"></h3>
+                    <p class="lightbox-description"></p>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(lightbox);
+    
+    // Estilos do lightbox
+    const lightboxStyles = `
+        .photo-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .photo-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-overlay {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10001;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .lightbox-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            display: block;
+        }
+        
+        .lightbox-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .lightbox-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .lightbox-description {
+            font-family: 'Poppins', sans-serif;
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .lightbox-overlay {
+                max-width: 95%;
+                max-height: 95%;
+            }
+            
+            .lightbox-title {
+                font-size: 1.5rem;
+            }
+            
+            .lightbox-info {
+                padding: 15px;
+            }
+        }
+    `;
+    
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = lightboxStyles;
+    document.head.appendChild(styleSheet);
+    
+    return lightbox;
+}
+
+// Função para abrir o lightbox
+function openLightbox(imageSrc, title, description) {
+    const lightbox = document.getElementById('photo-lightbox') || createLightbox();
+    const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxTitle = lightbox.querySelector('.lightbox-title');
+    const lightboxDescription = lightbox.querySelector('.lightbox-description');
+    
+    lightboxImage.src = imageSrc;
+    lightboxTitle.textContent = title;
+    lightboxDescription.textContent = description;
+    
+    lightbox.classList.remove('hidden');
+    setTimeout(() => lightbox.classList.add('active'), 10);
+    
+    // Prevenir scroll do body
+    document.body.style.overflow = 'hidden';
+}
+
+// Função para fechar o lightbox
+function closeLightbox() {
+    const lightbox = document.getElementById('photo-lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        setTimeout(() => {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+}
+
+// Configurar eventos das galerias de fotos
+function setupPhotoGalleries() {
+    const galleryImages = document.querySelectorAll('.gallery-img');
+    
+    // Dados das imagens
+    const imageData = {
+        'nv1MkMUvLjmE.jpg': {
+            title: 'Batman - O Cavaleiro das Trevas',
+            description: 'O protetor de Gotham City em toda sua glória sombria.'
+        },
+        'UwN7gF7MPqmn.jpg': {
+            title: 'Superman - O Homem de Aço',
+            description: 'O último filho de Krypton, símbolo de esperança.'
+        },
+        'bpCKLFvc85FT.jpg': {
+            title: 'Spider-Man - O Amigão da Vizinhança',
+            description: 'Com grandes poderes vêm grandes responsabilidades.'
+        },
+        'UcD0oebpj3N3.jpg': {
+            title: 'Bridgerton',
+            description: 'Romance e elegância na era Regencial inglesa.'
+        },
+        'bvGlNw6QsUCj.jpg': {
+            title: 'Heartstopper',
+            description: 'Uma história de amor jovem, pura e emocionante.'
+        },
+        'CZNciy1kyCwE.jpg': {
+            title: 'Virgin River',
+            description: 'Romance e drama em uma pequena cidade acolhedora.'
+        }
+    };
+    
+    galleryImages.forEach(img => {
+        img.addEventListener('click', function() {
+            const imageName = this.src.split('/').pop();
+            const data = imageData[imageName];
+            
+            if (data) {
+                openLightbox(this.src, data.title, data.description);
+                
+                // Efeito de partículas ao clicar
+                const rect = this.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                
+                // Determinar tipo de partícula baseado na galeria
+                const isHeroGallery = this.closest('.hero-gallery');
+                const particleType = isHeroGallery ? '⚡' : '💖';
+                
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createSpecialParticle(
+                            x + (Math.random() - 0.5) * 100,
+                            y + (Math.random() - 0.5) * 100,
+                            particleType
+                        );
+                    }, i * 100);
+                }
+            }
+        });
+        
+        // Efeito hover
+        img.addEventListener('mouseenter', function() {
+            this.style.filter = 'brightness(1.1) saturate(1.2)';
+        });
+        
+        img.addEventListener('mouseleave', function() {
+            this.style.filter = 'brightness(1) saturate(1)';
+        });
+    });
+    
+    // Configurar eventos do lightbox
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('lightbox-close') || 
+            e.target.classList.contains('photo-lightbox')) {
+            closeLightbox();
+        }
+    });
+    
+    // Fechar lightbox com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+}
+
+// Função para criar partículas especiais
+function createSpecialParticle(x, y, emoji) {
+    const particle = document.createElement('div');
+    particle.textContent = emoji;
+    particle.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        font-size: 24px;
+        pointer-events: none;
+        z-index: 9999;
+        animation: specialParticleFloat 2s ease-out forwards;
+        transform: translate(-50%, -50%);
+    `;
+    
+    document.body.appendChild(particle);
+    
+    // Adicionar animação CSS se não existir
+    if (!document.querySelector('#special-particle-styles')) {
+        const styles = document.createElement('style');
+        styles.id = 'special-particle-styles';
+        styles.textContent = `
+            @keyframes specialParticleFloat {
+                0% {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                }
+                50% {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.8) rotate(360deg) translateY(-100px);
+                }
+            }
+        `;
+        document.head.appendChild(styles);
+    }
+    
+    setTimeout(() => {
+        if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+        }
+    }, 2000);
+}
+
+// Inicializar galerias quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    setupPhotoGalleries();
+});
+
