@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Estado atual
     let currentMoment = 1;
     let isMusicPlaying = false;
-    let userInteracted = false;
     
     // Inicializar a timeline e música
     function initTimeline() {
@@ -24,19 +23,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicializar controle de música
     function initMusicControl() {
-        if (!backgroundMusic) {
-            console.log('Elemento de áudio não encontrado');
-            return;
-        }
-        
         // Configurar volume inicial
         backgroundMusic.volume = 0.3;
         
         // Event listener para o botão de música
-        musicToggle.addEventListener('click', function() {
-            userInteracted = true;
-            toggleMusic();
-        });
+        musicToggle.addEventListener('click', toggleMusic);
+        
+        // Tentar reproduzir automaticamente (pode ser bloqueado pelo navegador)
+        tryAutoPlay();
         
         // Event listeners para eventos de áudio
         backgroundMusic.addEventListener('play', function() {
@@ -44,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
             musicToggle.classList.add('playing');
             musicToggle.classList.remove('paused');
             musicIcon.textContent = '🎵';
-            console.log('🎵 Música iniciada');
         });
         
         backgroundMusic.addEventListener('pause', function() {
@@ -52,21 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
             musicToggle.classList.remove('playing');
             musicToggle.classList.add('paused');
             musicIcon.textContent = '🔇';
-            console.log('🔇 Música pausada');
-        });
-        
-        backgroundMusic.addEventListener('error', function(e) {
-            console.error('Erro ao carregar música:', e);
-            musicToggle.classList.add('paused');
-            musicIcon.textContent = '❌';
-        });
-        
-        backgroundMusic.addEventListener('loadstart', function() {
-            console.log('Iniciando carregamento da música...');
-        });
-        
-        backgroundMusic.addEventListener('canplay', function() {
-            console.log('Música carregada e pronta para tocar');
         });
         
         // Adicionar efeito visual quando a música está tocando
@@ -79,33 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-        
-        // Tentar reprodução automática após primeiro clique do usuário
-        document.addEventListener('click', function() {
-            if (!userInteracted) {
-                userInteracted = true;
-                tryAutoPlay();
-            }
-        }, { once: true });
-        
-        // Inicializar estado do botão
-        musicToggle.classList.add('paused');
-        musicIcon.textContent = '🔇';
     }
     
     // Tentar reprodução automática
     function tryAutoPlay() {
-        if (!backgroundMusic || userInteracted === false) return;
-        
         const playPromise = backgroundMusic.play();
         
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 // Reprodução automática bem-sucedida
-                console.log('🎵 Música iniciada automaticamente após interação do usuário');
+                console.log('🎵 Música iniciada automaticamente');
             }).catch(error => {
                 // Reprodução automática foi bloqueada
-                console.log('🔇 Reprodução automática ainda bloqueada:', error.message);
+                console.log('🔇 Reprodução automática bloqueada pelo navegador');
                 musicToggle.classList.add('paused');
                 musicIcon.textContent = '🔇';
             });
@@ -114,21 +78,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Alternar reprodução da música
     function toggleMusic() {
-        if (!backgroundMusic) {
-            console.log('Elemento de áudio não encontrado');
-            return;
-        }
-        
         if (isMusicPlaying) {
             backgroundMusic.pause();
         } else {
             const playPromise = backgroundMusic.play();
             if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log('🎵 Música iniciada pelo usuário');
-                }).catch(error => {
-                    console.error('Erro ao reproduzir música:', error);
-                    alert('Não foi possível reproduzir a música. Verifique se o arquivo está acessível.');
+                playPromise.catch(error => {
+                    console.log('Erro ao reproduzir música:', error);
                 });
             }
         }
@@ -138,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             musicToggle.style.transform = '';
         }, 150);
-    }
     
     // Mostrar momento específico
     function showMoment(momentNumber) {
@@ -203,11 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMoment(currentMoment - 1);
             } else if (e.key === 'ArrowRight' && currentMoment < timelineItems.length) {
                 showMoment(currentMoment + 1);
-            } else if (e.key === ' ') { // Barra de espaço para pausar/reproduzir música
-                e.preventDefault();
-                if (userInteracted) {
-                    toggleMusic();
-                }
             }
         });
         
@@ -340,6 +290,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Auto-navegação (opcional)
+    let autoPlay = false;
+    let autoPlayInterval;
+    
+    function startAutoPlay() {
+        if (autoPlay) return;
+        
+        autoPlay = true;
+        autoPlayInterval = setInterval(() => {
+            const nextMoment = currentMoment === timelineItems.length ? 1 : currentMoment + 1;
+            showMoment(nextMoment);
+        }, 8000);
+    }
+    
+    function stopAutoPlay() {
+        autoPlay = false;
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
+    // Parar auto-play quando usuário interage
+    navButtons.forEach(btn => {
+        btn.addEventListener('click', stopAutoPlay);
+    });
+    
+    document.addEventListener('keydown', stopAutoPlay);
+    
     // Inicializar tudo
     initTimeline();
     
@@ -348,7 +326,17 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('💕 Site do casal carregado com amor! 💕');
         console.log('Use as setas do teclado ou os botões para navegar');
         console.log('Clique nas imagens para ver efeitos especiais!');
-        console.log('Pressione ESPAÇO ou clique no botão 🎵 para controlar a música');
     }, 1000);
 });
+
+
+
+// Função para abrir calendários
+function openCalendar(type) {
+    if (type === 'hero') {
+        window.location.href = 'hero-calendar.html';
+    } else if (type === 'romance') {
+        window.location.href = 'romance-calendar.html';
+    }
+}
 
